@@ -4,7 +4,9 @@
   "description": "personal finance application",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Martin Olague",
@@ -21,8 +23,10 @@
     "@types/node": "^22.7.4",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
     "ajv": "^7.2.4",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
   },
   "browserslist": {
     "production": [

@@ -6,7 +6,7 @@ import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
   authDomain: 'personal-finance-spa.firebaseapp.com',
   projectId: 'personal-finance-spa',
   storageBucket: 'personal-finance-spa.appspot.com',
