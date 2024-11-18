@@ -9,10 +9,13 @@ import {
   createRouter,
   createRoute,
   createRootRoute,
+  redirect,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import { transactionRoute } from './routes/Transactionsroute';
 import { overviewRoute } from './routes/Overviewroute';
+import { signinRoute } from './routes/SignInroute';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 // const TanStackRouterDevtools =
 //   process.env.NODE_ENV === 'production'
@@ -91,6 +94,7 @@ const routeTree = rootRoute.addChildren([
   aboutRoute,
   transactionRoute,
   overviewRoute,
+  signinRoute,
 ]);
 
 const router = createRouter({ routeTree });
