@@ -3,8 +3,11 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import React, { useEffect } from 'react';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
+import { Grid2, Typography, useTheme } from '@mui/material';
 
 export const Overview = () => {
+  const theme = useTheme();
+  console.log({ theme });
   useAuthStatus();
   const fetchTransations = async () => {
     try {
@@ -28,5 +31,9 @@ export const Overview = () => {
   useEffect(() => {
     fetchTransations();
   }, []);
-  return <div>Overview</div>;
+  return (
+    <Grid2>
+      <Typography>Overview</Typography>
+    </Grid2>
+  );
 };

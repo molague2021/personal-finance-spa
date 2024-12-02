@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Sidebar } from './components/Sidebar/Sidebar';
-import { Grid2 } from '@mui/material';
+import { CssBaseline, Grid2, ThemeProvider } from '@mui/material';
 // Import the generated route tree
 import {
   Outlet,
@@ -16,6 +16,7 @@ import { transactionRoute } from './routes/Transactionsroute';
 import { overviewRoute } from './routes/Overviewroute';
 import { signinRoute } from './routes/SignInroute';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { defaultTheme } from './Theme/defaultTheme';
 
 // const TanStackRouterDevtools =
 //   process.env.NODE_ENV === 'production'
@@ -102,13 +103,16 @@ const router = createRouter({ routeTree });
 export const App = () => {
   console.log(import.meta.env.VITE_APP_MY_KEY);
   return (
-    <Grid2 display="flex" sx={{ width: '100%', height: '100%' }}>
-      <RouterProvider router={router} />
-      {/* <Sidebar />
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
+      <Grid2 display="flex" sx={{ width: '100%', height: '100%' }}>
+        <RouterProvider router={router} />
+        {/* <Sidebar />
       <Grid2>Hello, personal finance app!</Grid2> */}
-      {/* <Suspense>
+        {/* <Suspense>
         <TanStackRouterDevtools />
-      </Suspense> */}
-    </Grid2>
+        </Suspense> */}
+      </Grid2>
+    </ThemeProvider>
   );
 };
