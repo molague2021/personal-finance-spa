@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import { Button, Grid2, MenuItem, MenuList, Typography } from '@mui/material';
 import logoLarge from '../../../assets/images/logo-large.svg';
-import homeIcon from '../../../assets/images/icon-nav-overview.svg';
-import transationIcon from '../../../assets/images/icon-nav-transactions.svg';
-import budgetIcon from '../../../assets/images/icon-nav-budgets.svg';
-import potsIcon from '../../../assets/images/icon-nav-pots.svg';
+import logoSmall from '../../../assets/images/logo-small.svg';
 import minimizeIcon from '../../../assets/images/icon-minimize-menu.svg';
+
 import { OverviewIcon } from '../../icons/OverviewIcon';
 import { TransactionIcon } from '../../icons/TransactionIcon';
 import { BudgetIcon } from '../../icons/BudgetIcon';
@@ -55,16 +53,19 @@ const navMenu = [
 
 export const Sidebar = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [expand, setExpand] = useState(true);
   return (
-    <Box sx={{ width: '300px' }}>
+    <Box sx={{ width: expand ? '300px' : '85px' }}>
       <Drawer
         sx={{
-          maxWidth: '300px',
+          maxWidth: expand ? '300px' : '85px',
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             maxWidth: '300px',
             boxSizing: 'border-box',
             backgroundColor: '#201F24',
+            borderTopRightRadius: '15px',
+            borderBottomRightRadius: '15px',
             gap: '16px',
           },
         }}
@@ -75,27 +76,30 @@ export const Sidebar = () => {
           display="flex"
           sx={{ width: '100%', height: '102px', padding: '40px 32px' }}
         >
-          <img src={logoLarge} style={{ height: '22px' }} />
+          <img
+            src={expand ? logoLarge : logoSmall}
+            style={{ height: '22px' }}
+          />
         </Grid2>
         <MenuList
-          // variant="selectedMenu"
           disablePadding
-          sx={{ width: '300px', height: '100%' }}
+          sx={{ width: expand ? '300px' : '85px', height: '100%' }}
         >
           {navMenu.map((menu, index) => (
-            <Link to={`/${menu.url}`}>
+            <Link to={`/${menu.url}`} style={{ textDecoration: 'none' }}>
               <MenuItem
                 sx={{
                   paddingLeft: '24px',
                   gap: '16px',
-                  width: '276px',
+                  width: expand ? '276px' : '75px',
                   height: '56px',
-                  borderTopRightRadius: selectedIndex === index && '10px',
-                  borderBottomRightRadius: selectedIndex === index && '10px',
+                  borderTopRightRadius: selectedIndex === index ? '10px' : '',
+                  borderBottomRightRadius:
+                    selectedIndex === index ? '10px' : '',
                   backgroundColor:
-                    selectedIndex === index && 'white !important',
+                    selectedIndex === index ? 'white !important' : '',
                   [`.MuiTypography-root`]: {
-                    color: selectedIndex === index && '#201F24 !important',
+                    color: selectedIndex === index ? '#201F24 !important' : '',
                   },
                   borderLeft:
                     selectedIndex === index
@@ -103,7 +107,8 @@ export const Sidebar = () => {
                       : '4px solid #201F24',
                   '&:hover': {
                     [`.MuiTypography-root`]: {
-                      color: selectedIndex !== index && '#F2F2F2 !important',
+                      color:
+                        selectedIndex !== index ? '#F2F2F2 !important' : '',
                     },
                   },
                 }}
@@ -119,18 +124,11 @@ export const Sidebar = () => {
                 >
                   {menu.icon(selectedIndex === index)}
                 </Box>
-
-                <Typography
-                  sx={{
-                    width: '100%',
-                    fontSize: '16px',
-                    lineHeight: '150%',
-                    letterSpacing: '0px',
-                    color: '#B3B3B3',
-                  }}
-                >
-                  {menu.title}
-                </Typography>
+                {expand && (
+                  <Typography variant="h3" color="#B3B3B3">
+                    {menu.title}
+                  </Typography>
+                )}
               </MenuItem>
             </Link>
           ))}
@@ -143,16 +141,27 @@ export const Sidebar = () => {
               height: '56px',
               padding: '16px 32px',
             }}
+            onClick={() => setExpand((prev) => !prev)}
           >
             <Grid2 display="flex" gap="16px">
-              <img src={minimizeIcon} style={{ height: '22px' }} />
-              <Typography
-                textAlign="start"
-                sx={{ width: '300px', height: '16px' }}
-                color="#B3B3B3"
-              >
-                Minimize Menu
-              </Typography>
+              <img
+                src={minimizeIcon}
+                style={{
+                  height: '22px',
+                  transform: expand ? 'rotate(0deg)' : 'rotate(180deg)',
+                  transition: '.4s tranform ease',
+                }}
+              />
+              {expand && (
+                <Typography
+                  variant="h3"
+                  textAlign="start"
+                  sx={{ width: '300px', height: '16px' }}
+                  color="#B3B3B3"
+                >
+                  Minimize Menu
+                </Typography>
+              )}
             </Grid2>
           </Button>
         </Grid2>

@@ -1,7 +1,7 @@
 const baseFontSize = 16;
 
 const typography = {
-  fontFamily: 'Lato, lato, apple color emoji, sans-serif',
+  fontFamily: 'Public Sans, serif',
   fontSize: baseFontSize,
   fontWeightBold: 800,
   htmlFontSize: baseFontSize,
@@ -19,10 +19,10 @@ const typography = {
     lineHeight: '1.2',
   },
   h3: {
-    fontSize: '3rem',
+    fontSize: '1rem',
     fontWeight: 800,
     letterSpacing: '0',
-    lineHeight: '1.167',
+    lineHeight: '150%',
   },
   h4: {
     fontSize: '2.125rem',
