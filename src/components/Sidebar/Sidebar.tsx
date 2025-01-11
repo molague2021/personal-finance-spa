@@ -58,7 +58,7 @@ export const Sidebar = () => {
     <Box sx={{ width: expand ? '300px' : '85px' }}>
       <Drawer
         sx={{
-          maxWidth: expand ? '300px' : '85px',
+          width: expand ? '300px' : '85px',
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             maxWidth: '300px',
