@@ -12,6 +12,9 @@ import { transactionRoute } from './routes/Transactionsroute';
 import { overviewRoute } from './routes/Overviewroute';
 import { signinRoute } from './routes/SignInroute';
 import { defaultTheme } from './Theme/defaultTheme';
+import { recurringBillsroute } from './routes/RecurringBillsroute';
+import { potsRoute } from './routes/Potsroute';
+import { budgetsRoute } from './routes/Budgetsroute';
 
 declare module '@tanstack/react-router' {
   interface Register {
@@ -55,6 +58,9 @@ const routeTree = rootRoute.addChildren([
   transactionRoute,
   overviewRoute,
   signinRoute,
+  potsRoute,
+  recurringBillsroute,
+  budgetsRoute,
 ]);
 
 const router = createRouter({ routeTree });

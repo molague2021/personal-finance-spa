@@ -29,39 +29,39 @@ const financeOptions = [
 export const Overview = () => {
   const theme = useTheme();
   console.log({ theme });
-  useAuthStatus();
+  // useAuthStatus();
   const format = new Intl.NumberFormat('en-us', {
     currency: 'USD',
     style: 'currency',
   });
   // const cardSubtitle = ['Current Balance', 'Income', 'Expenses'];
-  const fetchTransations = async () => {
-    try {
-      const transactionRef = collection(db, 'transactions');
+  // const fetchTransations = async () => {
+  //   try {
+  //     const transactionRef = collection(db, 'transactions');
 
-      const auth = getAuth();
+  //     const auth = getAuth();
 
-      const q = query(transactionRef);
+  //     const q = query(transactionRef);
 
-      const querySnap = await getDocs(q);
+  //     const querySnap = await getDocs(q);
 
-      console.log({ auth }, { querySnap });
-      querySnap.forEach((doc) => {
-        console.log({ doc }, doc.data());
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     console.log({ auth }, { querySnap });
+  //     querySnap.forEach((doc) => {
+  //       console.log({ doc }, doc.data());
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
   console.log({ data });
 
   const cardSubtitle = Object.keys(data.balance);
 
   console.log(Object.keys(data.balance));
 
-  useEffect(() => {
-    fetchTransations();
-  }, []);
+  // useEffect(() => {
+  //   fetchTransations();
+  // }, []);
 
   const leftSide = financeOptions.slice(0, 2);
   const rightSide = financeOptions.slice(2, 4);

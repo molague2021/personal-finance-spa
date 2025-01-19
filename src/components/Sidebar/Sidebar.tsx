@@ -16,35 +16,35 @@ import { Link } from '@tanstack/react-router';
 const navMenu = [
   {
     title: 'Overview',
-    url: 'overview',
+    url: '/overview',
     icon: (isSelected: boolean) => (
       <OverviewIcon fill={isSelected ? '#277C78' : '#B3B3B3'} />
     ),
   },
   {
     title: 'Transactions',
-    url: 'transactions',
+    url: '/transactions',
     icon: (isSelected: boolean) => (
       <TransactionIcon fill={isSelected ? '#277C78' : '#B3B3B3'} />
     ),
   },
   {
     title: 'Budgets',
-    url: 'budgets',
+    url: '/budgets',
     icon: (isSelected: boolean) => (
       <BudgetIcon fill={isSelected ? '#277C78' : '#B3B3B3'} />
     ),
   },
   {
     title: 'Pots',
-    url: 'pots',
+    url: '/pots',
     icon: (isSelected: boolean) => (
       <PotsIcon fill={isSelected ? '#277C78' : '#B3B3B3'} />
     ),
   },
   {
     title: 'Recurring Bills',
-    url: 'recurringBills',
+    url: '/recurring-bills',
     icon: (isSelected: boolean) => (
       <RecurringBills fill={isSelected ? '#277C78' : '#B3B3B3'} />
     ),
