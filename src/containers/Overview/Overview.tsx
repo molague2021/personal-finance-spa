@@ -10,18 +10,22 @@ import { OverviewCard } from '../../components/OverviewCard/OverviewCard';
 const financeOptions = [
   {
     title: 'Pots',
+    type: 'pots',
     link: '/',
   },
   {
     title: 'Transactions',
+    type: 'transactions',
     link: '/',
   },
   {
     title: 'Budgets',
+    type: 'budgets',
     link: '/',
   },
   {
     title: 'Recurring Bills',
+    type: 'recurringBills',
     link: '/',
   },
 ];

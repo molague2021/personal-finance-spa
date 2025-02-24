@@ -5,13 +5,12 @@ import Typography from '@mui/material/Typography';
 import { Link } from '@tanstack/react-router';
 import React, { ReactNode } from 'react';
 import caretRight from '../../../assets/images/icon-caret-right.svg';
+import { OverviewCardContent } from './OverviewCardContent';
 
 export const OverviewCard = ({
   option,
-  children,
 }: {
-  option: { title: string };
-  children?: ReactNode;
+  option: { title: string; type: string; link: string };
 }) => {
   const theme = useTheme();
   return (
@@ -42,7 +41,7 @@ export const OverviewCard = ({
           </Box>
         </Link>
       </Grid2>
-      {children}
+      <OverviewCardContent type={option.type} />
     </Card>
   );
 };
