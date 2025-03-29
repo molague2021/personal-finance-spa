@@ -69,8 +69,8 @@ const typography = {
   body2: {
     fontSize: '0.875rem',
     fontWeight: 400,
-    letterSpacing: '0.25px',
-    lineHeight: '1.429',
+    letterSpacing: '0px',
+    lineHeight: '150%',
   },
   button: {
     fontSize: '0.875rem',
@@ -82,8 +82,8 @@ const typography = {
   caption: {
     fontSize: '0.75rem',
     fontWeight: 400,
-    letterSpacing: '0.15px',
-    lineHeight: '1.334',
+    letterSpacing: '0px',
+    lineHeight: '150%',
   },
   caption2: {
     fontSize: '0.625rem',

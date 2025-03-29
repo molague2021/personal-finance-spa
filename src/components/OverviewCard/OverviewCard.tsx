@@ -3,7 +3,6 @@ import Card from '@mui/material/Card';
 import Grid2 from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 import { Link } from '@tanstack/react-router';
-import React, { ReactNode } from 'react';
 import caretRight from '../../../assets/images/icon-caret-right.svg';
 import { OverviewCardContent } from './OverviewCardContent';
 
@@ -18,9 +17,12 @@ export const OverviewCard = ({
       sx={{
         padding: '32px',
         width: '100%',
-        height: '119px',
+        minHeight: '119px',
         backgroundColor: theme.palette.background.paper,
         boxShadow: 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
       }}
     >
       <Grid2 display="flex" justifyContent="space-between">
