@@ -57,11 +57,8 @@ export const Overview = () => {
   //     console.error(error);
   //   }
   // };
-  console.log({ data });
 
   const cardSubtitle = Object.keys(data.balance);
-
-  console.log(Object.keys(data.balance));
 
   // useEffect(() => {
   //   fetchTransations();

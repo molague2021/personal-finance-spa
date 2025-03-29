@@ -4,9 +4,7 @@ import potIcon from '../../../../assets/images/icon-pot.svg';
 
 export const Pots = () => {
   const theme = useTheme();
-  console.log({ data });
   const potsData = data.pots.slice(0, 4);
-  console.log({ potsData });
 
   const total = data.pots.reduce((acc, pot) => acc + pot.total, 0);
 
@@ -45,8 +43,7 @@ export const Pots = () => {
         }}
       >
         {potsData.map((pot, index) => {
-          const { name, total, target, theme: potColor } = pot;
-          const evenNumber = index % 2 === 0;
+          const { name, total, theme: potColor } = pot;
 
           return (
             <Grid2
