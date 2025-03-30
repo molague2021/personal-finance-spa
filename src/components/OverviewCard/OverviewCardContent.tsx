@@ -1,5 +1,6 @@
 import { Grid2 } from '@mui/material';
 import { Pots } from './components/Pots';
+import { Transactions } from './components/Transactions';
 
 const Content = ({ type }: { type: string }) => {
   switch (type) {
@@ -7,7 +8,7 @@ const Content = ({ type }: { type: string }) => {
       return <Pots />;
 
     case 'transactions':
-      return <div>Transactions</div>;
+      return <Transactions />;
 
     case 'budgets':
       return <div>Budgets</div>;

@@ -30,14 +30,16 @@ const financeOptions = [
   },
 ];
 
+const currencyFormat = new Intl.NumberFormat('en-us', {
+  currency: 'USD',
+  style: 'currency',
+});
+
 export const Overview = () => {
   const theme = useTheme();
   console.log({ theme });
   // useAuthStatus();
-  const format = new Intl.NumberFormat('en-us', {
-    currency: 'USD',
-    style: 'currency',
-  });
+
   // const cardSubtitle = ['Current Balance', 'Income', 'Expenses'];
   // const fetchTransations = async () => {
   //   try {
@@ -120,7 +122,7 @@ export const Overview = () => {
                       ? theme.palette.background.paper
                       : theme.palette.grey[900]
                   }
-                >{`${format.format(balance)}`}</Typography>
+                >{`${currencyFormat.format(balance)}`}</Typography>
               </Grid2>
             </Card>
           );
