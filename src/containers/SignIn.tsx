@@ -38,7 +38,7 @@ function SignIn() {
       console.log({ userCredentials });
       if (userCredentials.user) {
         navigation({
-          to: '-1',
+          //to: '-1',
           hash: (blah) => {
             console.log({ blah });
             return '/';

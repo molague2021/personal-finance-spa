@@ -2,9 +2,9 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import { Button, Grid2, MenuItem, MenuList, Typography } from '@mui/material';
-import logoLarge from '../../../assets/images/logo-large.svg';
-import logoSmall from '../../../assets/images/logo-small.svg';
-import minimizeIcon from '../../../assets/images/icon-minimize-menu.svg';
+import logoLarge from '/public/assets/images/logo-large.svg';
+import logoSmall from '/public/assets/images/logo-small.svg';
+import minimizeIcon from '/public/assets/images/icon-minimize-menu.svg';
 
 import { OverviewIcon } from '../../icons/OverviewIcon';
 import { TransactionIcon } from '../../icons/TransactionIcon';

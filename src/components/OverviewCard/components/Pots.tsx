@@ -1,6 +1,6 @@
 import data from '../../../../data.json';
 import { Box, Grid2, Stack, Typography, useTheme } from '@mui/material';
-import potIcon from '../../../../assets/images/icon-pot.svg';
+import potIcon from '/public/assets/images/icon-pot.svg';
 
 export const Pots = () => {
   const theme = useTheme();
