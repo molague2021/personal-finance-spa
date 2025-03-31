@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import Grid2 from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 import { Link } from '@tanstack/react-router';
-import caretRight from '../../../assets/images/icon-caret-right.svg';
+import caretRight from '/assets/images/icon-caret-right.svg';
 import { OverviewCardContent } from './OverviewCardContent';
 
 export const OverviewCard = ({

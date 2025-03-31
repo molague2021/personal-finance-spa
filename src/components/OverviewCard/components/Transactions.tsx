@@ -18,6 +18,8 @@ export const Transactions = () => {
   const theme = useTheme();
   const transactionData = data.transactions;
 
+  console.log({ transactionData });
+
   return (
     <Grid2 container maxHeight={399} gap="20px" sx={{ overflowY: 'auto' }}>
       {transactionData.map((transaction, index) => {
