@@ -12,6 +12,7 @@ import {
   Orange,
   Pink,
   Purple,
+  Cyan,
   Red,
   Teal,
   Yellow,
@@ -40,6 +41,7 @@ declare module '@mui/material' {
     pink: Pink;
     purple: Purple;
     red: Red;
+    cyan: Cyan;
     teal: Teal;
     yellow: Yellow;
     danger: Palette['primary'];
@@ -56,6 +58,7 @@ declare module '@mui/material' {
     orange: Orange;
     pink: Pink;
     purple: Purple;
+    cyan: Cyan;
     red: Red;
     teal: Teal;
     yellow: Yellow;

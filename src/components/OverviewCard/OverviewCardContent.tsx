@@ -1,6 +1,8 @@
 import { Grid2 } from '@mui/material';
 import { Pots } from './components/Pots';
 import { Transactions } from './components/Transactions';
+import { BudgetsOverview } from './components/BudgetsOverview';
+import { RecurringBillsOverview } from './components/RecurringBillsOverview';
 
 const Content = ({ type }: { type: string }) => {
   switch (type) {
@@ -11,10 +13,10 @@ const Content = ({ type }: { type: string }) => {
       return <Transactions />;
 
     case 'budgets':
-      return <div>Budgets</div>;
+      return <BudgetsOverview />;
 
     case 'recurringBills':
-      return <div>Recurring Bills</div>;
+      return <RecurringBillsOverview />;
 
     default:
       return null;

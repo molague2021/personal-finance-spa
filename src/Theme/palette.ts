@@ -1,4 +1,3 @@
-import { cyan } from '@mui/material/colors';
 import {
   beige,
   blue,
@@ -14,6 +13,7 @@ import {
   purple,
   red,
   teal,
+  cyan,
   yellow,
 } from './colors';
 
@@ -100,4 +100,5 @@ export const palette = {
   grey,
   blueGrey,
   beige,
+  cyan,
 } as const;

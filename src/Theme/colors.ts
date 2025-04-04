@@ -1,3 +1,5 @@
+import { cyan as muiCyan } from '@mui/material/colors';
+
 const orange = {
   50: '#FFF2E1',
   100: '#FFDEB5',
@@ -125,6 +127,7 @@ const teal = {
 
 const green = {
   50: '#E5FDF0',
+  90: '#277C78',
   100: '#C6F8DC',
   200: '#A5F2C9',
   300: '#7EEDB4',
@@ -150,6 +153,7 @@ const lightGreen = {
 } as const;
 
 const yellow = {
+  100: '#F2CDAC',
   300: '#F8F7EF',
   400: '#F7F5E5',
   500: '#F6F3D5',
@@ -178,6 +182,11 @@ const grey = {
   A700: '#303030',
 } as const;
 
+const cyan = {
+  ...muiCyan,
+  90: '#E0F7FA',
+};
+
 const beige = {
   A100: '#F8F4F0',
   A500: '#98908B',
@@ -203,6 +212,7 @@ const colors = {
   grey,
   blueGrey,
   beige,
+  cyan,
   common,
 } as const;
 
@@ -221,6 +231,7 @@ export type Grey = typeof grey;
 export type BlueGrey = typeof blueGrey;
 export type Common = typeof common;
 export type Beige = typeof beige;
+export type Cyan = typeof cyan;
 export type Colors = typeof colors;
 
 export {
@@ -239,5 +250,6 @@ export {
   blueGrey,
   common,
   beige,
+  cyan,
   colors,
 };
