@@ -9,7 +9,12 @@ export const Pots = () => {
   const total = data.pots.reduce((acc, pot) => acc + pot.total, 0);
 
   return (
-    <Grid2 display="flex" sx={{ gap: '20px' }}>
+    <Grid2
+      // container
+      // spacing={2}
+      display="flex"
+      sx={{ gap: '20px', maxWidth: '608px' }}
+    >
       <Box
         minWidth={247}
         minHeight={110}
@@ -34,11 +39,12 @@ export const Pots = () => {
       </Box>
       <Grid2
         container
+        spacing={1}
         alignContent="space-between"
         justifyContent="space-between"
         sx={{
           display: 'flex',
-          minWidth: 277,
+          minWidth: '277px',
           minHeight: 102,
         }}
       >
@@ -47,6 +53,7 @@ export const Pots = () => {
 
           return (
             <Grid2
+              size={1}
               key={name}
               display="flex"
               alignItems="center"

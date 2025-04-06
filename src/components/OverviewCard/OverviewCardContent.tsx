@@ -24,9 +24,5 @@ const Content = ({ type }: { type: string }) => {
 };
 
 export const OverviewCardContent = ({ type }: { type: string }) => {
-  return (
-    <Grid2>
-      <Content type={type} />
-    </Grid2>
-  );
+  return <Content type={type} />;
 };

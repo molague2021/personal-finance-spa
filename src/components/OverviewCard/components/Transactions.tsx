@@ -21,7 +21,13 @@ export const Transactions = () => {
   console.log({ transactionData });
 
   return (
-    <Grid2 container maxHeight={399} gap="20px" sx={{ overflowY: 'auto' }}>
+    <Grid2
+      container
+      maxHeight={399}
+      maxWidth={608}
+      gap="20px"
+      sx={{ overflowY: 'auto' }}
+    >
       {transactionData.map((transaction, index) => {
         const date = new Date(transaction.date);
         const year = date.getFullYear();
@@ -83,7 +89,7 @@ export const Transactions = () => {
               <Box sx={{ width: '544px' }}>
                 <Divider
                   variant="fullWidth"
-                  orientation="vertical"
+                  orientation="horizontal"
                   sx={{
                     borderColor: theme.palette.grey[100],
                     borderBottomWidth: '1px',

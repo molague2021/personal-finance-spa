@@ -4,7 +4,7 @@ import { getAuth } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import data from '../../../data.json';
-import { Card, Grid2, Typography, useTheme } from '@mui/material';
+import { Box, Card, Grid2, Typography, useTheme } from '@mui/material';
 import { OverviewCard } from '../../components/OverviewCard/OverviewCard';
 
 const financeOptions = [
@@ -23,6 +23,7 @@ const financeOptions = [
     type: 'budgets',
     link: '/',
   },
+
   {
     title: 'Recurring Bills',
     type: 'recurringBills',
@@ -72,18 +73,28 @@ export const Overview = () => {
   console.log({ leftSide }, { rightSide });
 
   return (
-    <Grid2
+    <Box
       sx={{
-        width: '100%',
+        height: '100%',
         padding: '32px 40px',
-        backgroundColor: theme.palette.beige.A100,
       }}
       display="flex"
       flexDirection="column"
       gap="32px"
     >
       <Typography variant="h1">Overview</Typography>
-      <Grid2 display="flex" gap="24px">
+      <Grid2
+        container
+        gap="24px"
+        flexDirection="column"
+        maxHeight={{
+          xs: '100%',
+          sm: '100%',
+          md: '119px',
+          lg: '119px',
+          xl: '119px',
+        }}
+      >
         {cardSubtitle.map((subtitle, index) => {
           const subtitles = ['Current Balance', 'Income', 'Expenses'];
           const balance = data.balance[subtitle];
@@ -128,28 +139,22 @@ export const Overview = () => {
           );
         })}
       </Grid2>
-      <Grid2 display="flex" gap="24px">
-        <Grid2
-          display="flex"
-          gap="24px"
-          flexDirection="column"
-          sx={{ width: '608px' }}
-        >
-          {leftSide.map((option) => (
-            <OverviewCard option={option} />
-          ))}
-        </Grid2>
-        <Grid2
-          display="flex"
-          gap="24px"
-          flexDirection="column"
-          sx={{ width: '428px' }}
-        >
-          {rightSide.map((option) => (
-            <OverviewCard option={option} />
-          ))}
-        </Grid2>
+      <Grid2
+        container
+        flexDirection="column"
+        display="flex"
+        gap="24px"
+        maxWidth="1060px"
+        maxHeight={{
+          md: '761px',
+          lg: '761px',
+          xl: '761px',
+        }}
+      >
+        {financeOptions.map((option) => (
+          <OverviewCard option={option} />
+        ))}
       </Grid2>
-    </Grid2>
+    </Box>
   );
 };

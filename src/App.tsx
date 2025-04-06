@@ -70,7 +70,14 @@ export const App = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Grid2 display="flex" sx={{ width: '100%', height: '100%' }}>
+      <Grid2
+        display="flex"
+        sx={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: defaultTheme.palette.beige.A100,
+        }}
+      >
         <RouterProvider router={router} />
       </Grid2>
     </ThemeProvider>

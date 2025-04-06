@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@mui/material';
+import { Box, Stack, useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
 import Grid2 from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
@@ -13,15 +13,12 @@ export const OverviewCard = ({
 }) => {
   const theme = useTheme();
   return (
-    <Card
+    <Grid2
       sx={{
         padding: '32px',
-        width: '100%',
         minHeight: '119px',
         backgroundColor: theme.palette.background.paper,
         boxShadow: 'none',
-        display: 'flex',
-        flexDirection: 'column',
         gap: '20px',
       }}
     >
@@ -44,6 +41,6 @@ export const OverviewCard = ({
         </Link>
       </Grid2>
       <OverviewCardContent type={option.type} />
-    </Card>
+    </Grid2>
   );
 };
