@@ -1,4 +1,4 @@
-import { Sidebar } from './components/Sidebar/Sidebar';
+import { Sidebar } from './containers/Sidebar/Sidebar';
 import { CssBaseline, Grid2, ThemeProvider } from '@mui/material';
 import {
   Outlet,
@@ -75,7 +75,6 @@ export const App = () => {
         sx={{
           width: '100%',
           height: '100%',
-          backgroundColor: defaultTheme.palette.beige.A100,
         }}
       >
         <RouterProvider router={router} />

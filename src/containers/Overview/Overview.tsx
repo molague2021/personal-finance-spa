@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import data from '../../../data.json';
 import { Box, Card, Grid2, Typography, useTheme } from '@mui/material';
-import { OverviewCard } from '../../components/OverviewCard/OverviewCard';
+import { OverviewCard } from '../OverviewCard/OverviewCard';
 
 const financeOptions = [
   {
@@ -38,7 +38,6 @@ const currencyFormat = new Intl.NumberFormat('en-us', {
 
 export const Overview = () => {
   const theme = useTheme();
-  console.log({ theme });
   // useAuthStatus();
 
   // const cardSubtitle = ['Current Balance', 'Income', 'Expenses'];
@@ -69,8 +68,6 @@ export const Overview = () => {
 
   const leftSide = financeOptions.slice(0, 2);
   const rightSide = financeOptions.slice(2, 4);
-
-  console.log({ leftSide }, { rightSide });
 
   return (
     <Box
