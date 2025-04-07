@@ -1,5 +1,10 @@
 import { Sidebar } from './containers/Sidebar/Sidebar';
-import { CssBaseline, Grid2, ThemeProvider } from '@mui/material';
+import {
+  CssBaseline,
+  Grid2,
+  ThemeProvider,
+  useMediaQuery,
+} from '@mui/material';
 import {
   Outlet,
   RouterProvider,
@@ -67,14 +72,18 @@ const router = createRouter({ routeTree });
 
 export const App = () => {
   console.log(import.meta.env.VITE_APP_MY_KEY);
+  const isTablet = useMediaQuery(defaultTheme.breakpoints.between('xs', 'md'));
+  const isMobile = useMediaQuery(defaultTheme.breakpoints.down('xs'));
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Grid2
         display="flex"
+        flexDirection={isTablet || isMobile ? 'column-reverse' : 'row'}
         sx={{
           width: '100%',
           height: '100%',
+          overflow: 'hidden',
         }}
       >
         <RouterProvider router={router} />

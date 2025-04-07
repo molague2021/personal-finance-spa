@@ -4,7 +4,14 @@ import { getAuth } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 import data from '../../../data.json';
-import { Box, Card, Grid2, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Card,
+  Grid2,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { OverviewCard } from '../OverviewCard/OverviewCard';
 
 const financeOptions = [
@@ -66,14 +73,15 @@ export const Overview = () => {
   //   fetchTransations();
   // }, []);
 
-  const leftSide = financeOptions.slice(0, 2);
-  const rightSide = financeOptions.slice(2, 4);
+  const isTablet = useMediaQuery(theme.breakpoints.between('xs', 'md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
     <Box
       sx={{
         height: '100%',
         padding: '32px 40px',
+        overflowY: 'auto',
       }}
       display="flex"
       flexDirection="column"
@@ -84,21 +92,29 @@ export const Overview = () => {
         container
         gap="24px"
         flexDirection="column"
-        maxHeight={{
-          xs: '100%',
-          sm: '100%',
-          md: '119px',
-          lg: '119px',
-          xl: '119px',
+        maxHeight={() => {
+          if (isMobile) {
+            return '100%';
+          }
+          return '119px';
         }}
       >
         {cardSubtitle.map((subtitle, index) => {
           const subtitles = ['Current Balance', 'Income', 'Expenses'];
           const balance = data.balance[subtitle];
           return (
-            <Card
+            <Grid2
+              width={() => {
+                if (isTablet) {
+                  return '213px';
+                }
+
+                if (isMobile) {
+                  return '343px';
+                }
+                return '337px';
+              }}
               sx={{
-                width: '337px',
                 height: '119px',
                 backgroundColor:
                   subtitle === 'current'
@@ -132,7 +148,7 @@ export const Overview = () => {
                   }
                 >{`${currencyFormat.format(balance)}`}</Typography>
               </Grid2>
-            </Card>
+            </Grid2>
           );
         })}
       </Grid2>
@@ -142,7 +158,7 @@ export const Overview = () => {
         display="flex"
         gap="24px"
         maxWidth="1060px"
-        maxHeight={{
+        height={{
           md: '761px',
           lg: '761px',
           xl: '761px',

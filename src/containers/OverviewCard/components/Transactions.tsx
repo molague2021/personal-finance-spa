@@ -26,7 +26,7 @@ export const Transactions = () => {
       maxHeight={399}
       maxWidth={608}
       gap="20px"
-      sx={{ overflowY: 'auto' }}
+      sx={{ overflowY: 'auto', overflowX: 'hidden' }}
     >
       {transactionData.map((transaction, index) => {
         const date = new Date(transaction.date);

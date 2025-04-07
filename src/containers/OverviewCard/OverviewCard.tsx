@@ -13,13 +13,15 @@ export const OverviewCard = ({
 }) => {
   const theme = useTheme();
   return (
-    <Grid2
+    <Stack
+      display="flex"
+      gap="20px"
       sx={{
         padding: '32px',
         minHeight: '119px',
+        maxWidth: '608px',
         backgroundColor: theme.palette.background.paper,
         boxShadow: 'none',
-        gap: '20px',
       }}
     >
       <Grid2 display="flex" justifyContent="space-between">
@@ -41,6 +43,6 @@ export const OverviewCard = ({
         </Link>
       </Grid2>
       <OverviewCardContent type={option.type} />
-    </Grid2>
+    </Stack>
   );
 };

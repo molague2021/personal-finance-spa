@@ -9,12 +9,7 @@ export const Pots = () => {
   const total = data.pots.reduce((acc, pot) => acc + pot.total, 0);
 
   return (
-    <Grid2
-      // container
-      // spacing={2}
-      display="flex"
-      sx={{ gap: '20px', maxWidth: '608px' }}
-    >
+    <Grid2 display="flex" sx={{ gap: '20px', width: '608px' }}>
       <Box
         minWidth={247}
         minHeight={110}
@@ -44,11 +39,11 @@ export const Pots = () => {
         justifyContent="space-between"
         sx={{
           display: 'flex',
-          minWidth: '277px',
+          maxWidth: '277px',
           minHeight: 102,
         }}
       >
-        {potsData.map((pot, index) => {
+        {potsData.map((pot) => {
           const { name, total, theme: potColor } = pot;
 
           return (
