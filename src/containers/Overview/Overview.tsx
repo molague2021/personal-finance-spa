@@ -1,17 +1,5 @@
-import { db } from '../../../firebase.config';
-import { collection, getDocs, query } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { useEffect } from 'react';
-import { useAuthStatus } from '../../hooks/useAuthStatus';
 import data from '../../../data.json';
-import {
-  Box,
-  Card,
-  Grid2,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Box, Grid2, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { OverviewCard } from '../OverviewCard/OverviewCard';
 
 const financeOptions = [
@@ -38,7 +26,7 @@ const financeOptions = [
   },
 ];
 
-const currencyFormat = new Intl.NumberFormat('en-us', {
+export const currencyFormat = new Intl.NumberFormat('en-us', {
   currency: 'USD',
   style: 'currency',
 });
