@@ -185,7 +185,6 @@ export const Sidebar = () => {
           display: 'flex',
           justifyContent: isMobile || isTablet ? 'center' : null,
           placeContent: isMobile || isTablet ? 'space-between' : null,
-          padding: '0 40px',
           alignItems: isMobile || isTablet ? 'center' : null,
           flexDirection: isMobile || isTablet ? 'row' : 'column',
           width: () => {

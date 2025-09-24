@@ -22,6 +22,7 @@ export const OverviewCard = ({
         maxWidth: '608px',
         backgroundColor: theme.palette.background.paper,
         boxShadow: 'none',
+        borderRadius: '16px',
       }}
     >
       <Grid2 display="flex" justifyContent="space-between">

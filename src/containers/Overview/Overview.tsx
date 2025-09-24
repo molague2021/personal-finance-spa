@@ -68,7 +68,7 @@ export const Overview = () => {
     <Box
       sx={{
         height: '100%',
-        padding: '32px 40px',
+        padding: isMobile ? '24px 16px' : '32px 40px',
         overflowY: 'auto',
       }}
       display="flex"
@@ -92,6 +92,7 @@ export const Overview = () => {
           const balance = data.balance[subtitle];
           return (
             <Grid2
+              key={`card-${subtitle}`}
               width={() => {
                 if (isTablet) {
                   return '213px';
@@ -109,6 +110,7 @@ export const Overview = () => {
                     ? theme.palette.grey[900]
                     : theme.palette.background.paper,
                 boxShadow: 'none',
+                borderRadius: '16px',
               }}
             >
               <Grid2
