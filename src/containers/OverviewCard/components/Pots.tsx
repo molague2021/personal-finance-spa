@@ -1,15 +1,28 @@
 import data from '../../../../data.json';
-import { Box, Grid2, Stack, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Grid2,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import potIcon from '/public/assets/images/icon-pot.svg';
 
 export const Pots = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   const potsData = data.pots.slice(0, 4);
 
   const total = data.pots.reduce((acc, pot) => acc + pot.total, 0);
 
   return (
-    <Grid2 display="flex" sx={{ gap: '20px', width: '608px' }}>
+    <Grid2
+      display="flex"
+      flexDirection={isMobile ? 'column' : 'row'}
+      sx={{ gap: '20px', width: '608px' }}
+    >
       <Box
         minWidth={247}
         minHeight={110}
@@ -20,6 +33,7 @@ export const Pots = () => {
           gap: '16px',
           borderRadius: '12px',
           alignItems: 'center',
+          maxWidth: isMobile ? '303px' : '',
         }}
       >
         <img src={potIcon} style={{ width: '40px', height: '40px' }} />

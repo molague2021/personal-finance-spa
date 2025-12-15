@@ -4,6 +4,7 @@ import {
   Grid2,
   Stack,
   Typography,
+  useMediaQuery,
   useTheme,
 } from '@mui/material';
 import data from '../../../../data.json';
@@ -11,11 +12,16 @@ import { palette } from 'Theme/palette';
 
 export const RecurringBillsOverview = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   const transactionData = data;
 
   console.log({ transactionData });
   return (
-    <Stack sx={{ width: '364px', maxHeight: '207px' }} gap="12px">
+    <Stack
+      sx={{ width: isMobile ? '303px' : '364px', maxHeight: '207px' }}
+      gap="12px"
+    >
       <Grid2
         sx={{
           height: '61px',

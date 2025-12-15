@@ -9,7 +9,13 @@ import {
   Legend,
 } from 'recharts';
 import data from '../../../../data.json';
-import { Grid, Grid2, Typography } from '@mui/material';
+import {
+  Grid,
+  Grid2,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { currencyFormat } from 'containers/Overview/Overview';
 
 interface BudgetData {
@@ -19,6 +25,9 @@ interface BudgetData {
 }
 
 export const BudgetsOverview = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   const budgetsData = data.budgets?.map((budget) => ({
     name: budget.category,
     value: budget.maximum,
@@ -26,46 +35,60 @@ export const BudgetsOverview = () => {
   }));
 
   console.log({ budgetsData });
+  // TODO: Fix issue where legend is rendering outside of container or below the pie chart rather than middle, this is fixed after changing sizes of the app going between tablet size and regular app
   return (
-    <ResponsiveContainer width={364} height={302}>
-      <PieChart>
-        <Pie
-          data={budgetsData}
-          dataKey="value"
-          innerRadius={60}
-          style={{ minWidth: 364, minHeight: 302 }}
+    <>
+      {budgetsData && (
+        <ResponsiveContainer
+          width={isMobile ? 303 : 364}
+          height={isMobile ? 374 : 302}
         >
-          {budgetsData.map((entry) => (
-            <Cell key={`cell-${entry.name}`} fill={entry.color} />
-          ))}
-        </Pie>
-        <Legend
-          layout="vertical"
-          align="right"
-          verticalAlign="middle"
-          payload={budgetsData}
-          content={({ payload }) => {
-            return (
-              <>
-                {payload && payload?.length > 0 ? (
+          <PieChart>
+            <Pie
+              data={budgetsData}
+              dataKey="value"
+              innerRadius={60}
+              style={{ minWidth: isMobile ? 303 : 364, minHeight: 302 }}
+            >
+              {budgetsData.map((entry) => (
+                <Cell key={`cell-${entry.name}`} fill={entry.color} />
+              ))}
+            </Pie>
+            <Legend
+              layout={isMobile ? 'horizontal' : 'vertical'}
+              verticalAlign={isMobile ? 'bottom' : 'middle'}
+              align={isMobile ? 'center' : 'right'}
+              wrapperStyle={
+                isMobile
+                  ? {}
+                  : {
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }
+              }
+              payload={budgetsData}
+              content={({ payload }) => {
+                return (
                   <Box
-                    width={101}
+                    width={isMobile ? 303 : 101}
                     maxHeight={220}
                     sx={{
                       display: 'flex',
-                      flexDirection: 'column',
-                      gap: 1,
+                      flexWrap: isMobile ? 'wrap' : 'nowrap',
+                      flexDirection: isMobile ? 'row' : 'column',
+                      gap: isMobile ? '0 16px' : '8px',
                     }}
                   >
-                    {payload.map((entry: BudgetData) => (
+                    {payload?.map((entry: BudgetData) => (
                       <Box
                         key={`item-${entry.name}`}
-                        width={101}
+                        width={isMobile ? 143 : 101}
                         height={43}
                         sx={{
                           display: 'flex',
-                          justifyContent: 'space-between',
-                          gap: 1,
+                          justifyContent: isMobile ? '' : 'space-between',
+                          gap: isMobile ? 2 : 1,
                         }}
                       >
                         <Box
@@ -92,12 +115,12 @@ export const BudgetsOverview = () => {
                       </Box>
                     ))}
                   </Box>
-                ) : null}
-              </>
-            );
-          }}
-        />
-      </PieChart>
-    </ResponsiveContainer>
+                );
+              }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      )}
+    </>
   );
 };

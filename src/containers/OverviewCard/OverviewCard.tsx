@@ -1,4 +1,4 @@
-import { Box, Stack, useTheme } from '@mui/material';
+import { Box, Stack, useMediaQuery, useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
 import Grid2 from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
@@ -12,14 +12,15 @@ export const OverviewCard = ({
   option: { title: string; type: string; link: string };
 }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   return (
     <Stack
       display="flex"
       gap="20px"
       sx={{
-        padding: '32px',
+        padding: isMobile ? '24px 20px' : '32px',
         minHeight: '119px',
-        maxWidth: '608px',
+        maxWidth: isMobile ? '343px' : '608px',
         backgroundColor: theme.palette.background.paper,
         boxShadow: 'none',
         borderRadius: '16px',
