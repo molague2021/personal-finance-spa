@@ -20,7 +20,6 @@ import { defaultTheme } from './Theme/defaultTheme';
 import { recurringBillsroute } from './routes/RecurringBillsroute';
 import { potsRoute } from './routes/Potsroute';
 import { budgetsRoute } from './routes/Budgetsroute';
-
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router;
