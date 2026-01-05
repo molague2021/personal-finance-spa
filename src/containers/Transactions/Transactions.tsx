@@ -1,4 +1,11 @@
-import { TextField, useTheme } from '@mui/material';
+import {
+  Menu,
+  MenuItem,
+  Select,
+  styled,
+  TextField,
+  useTheme,
+} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,72 +18,104 @@ import Grid2 from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import data from '../../../data.json';
-import SearchIcon from '@mui/icons-material/Search';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
+import { ChangeEvent, useState } from 'react';
 
-// interface EnhancedTableProps {
-//   numSelected: number;
-//   onRequestSort: (
-//     event: React.MouseEvent<unknown>,
-//     property: keyof Data
-//   ) => void;
-//   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-//   order: Order;
-//   orderBy: string;
-//   rowCount: number;
-// }
+const StyledSelect = styled(Select)`
+  & .MuiSelect-select {
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    font-family:
+      Public Sans,
+      sans-serif;
+  }
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+  &.MuiMenuItem-root {
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    font-family:
+      Public Sans,
+      sans-serif;
+  }
+`;
 
 const EnhancedTableHead = () => {
   const theme = useTheme();
-  // const {
-  //   onSelectAllClick,
-  //   order,
-  //   orderBy,
-  //   numSelected,
-  //   rowCount,
-  //   onRequestSort,
-  // } = props;
-  // const createSortHandler =
-  //   (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-  //     onRequestSort(event, property);
-  //   };
+  const [sortBy, setSortBy] = useState('latest');
+  const [category, setCategory] = useState('allTransactions');
 
   return (
-    <TableHead>
-      <TableRow>
-        {/* <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell> */}
-        <TableCell>
-          <TextField
-            placeholder="Search transaction"
-            slotProps={{
-              input: {
-                endAdornment: <SearchTwoToneIcon />,
-              },
-            }}
-            sx={{
-              width: '320px',
-              '& .MuiOutlinedInput-root': {
-                height: '45px',
-                lineHeight: '150%',
-                fontSize: '14px',
-                letterSpacing: '0px',
-                fontFamily: 'Public Sans, sans-serif',
-              },
-            }}
-          />
-        </TableCell>
-      </TableRow>
-    </TableHead>
+    <Grid2 width={'100%'} display="flex" justifyContent="space-between">
+      <TextField
+        placeholder="Search transaction"
+        slotProps={{
+          input: {
+            endAdornment: (
+              <SearchTwoToneIcon
+                style={{ fill: `#201F24`, height: '13px', width: '13px' }}
+              />
+            ),
+          },
+        }}
+        sx={{
+          width: '320px',
+          '& .MuiOutlinedInput-root': {
+            height: '45px',
+            lineHeight: '150%',
+            fontSize: '14px',
+            letterSpacing: '0px',
+            fontFamily: 'Public Sans, sans-serif',
+          },
+        }}
+      />
+      <Grid2 display="flex" gap="24px">
+        <Box display="flex" alignItems="center" gap="8px">
+          <Typography variant="body2">Sort by</Typography>
+          <StyledSelect
+            value={sortBy}
+            size="small"
+            sx={{ height: '45px', minWidth: '132px' }}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSortBy(e.target.value)
+            }
+          >
+            <StyledMenuItem value="latest">Latest</StyledMenuItem>
+            <StyledMenuItem value="oldest">Oldest</StyledMenuItem>
+            <StyledMenuItem value="amountHighToLow">A to Z</StyledMenuItem>
+            <StyledMenuItem value="amountLowToHigh">Z to A</StyledMenuItem>
+            <StyledMenuItem value="aToZ">Hightest</StyledMenuItem>
+            <StyledMenuItem value="zToA">Lowest</StyledMenuItem>
+          </StyledSelect>
+        </Box>
+        <Box display="flex" alignItems="center" gap="8px">
+          <Typography variant="body2">Category</Typography>
+          <StyledSelect
+            value={category}
+            size="small"
+            sx={{ height: '45px', minWidth: '132px' }}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setCategory(e.target.value)
+            }
+          >
+            <StyledMenuItem value="allTransactions">
+              All Transactions
+            </StyledMenuItem>
+            <StyledMenuItem value="entertainment">Entertainment</StyledMenuItem>
+            <StyledMenuItem value="bills">Bills</StyledMenuItem>
+            <StyledMenuItem value="groceries">Groceries</StyledMenuItem>
+            <StyledMenuItem value="diningOut">Dining Out</StyledMenuItem>
+            <StyledMenuItem value="transportation">
+              Transportation
+            </StyledMenuItem>
+            <StyledMenuItem value="personalCare">Personal Care</StyledMenuItem>
+          </StyledSelect>
+        </Box>
+      </Grid2>
+    </Grid2>
   );
 };
 
@@ -84,19 +123,6 @@ export const Transactions = () => {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.between('xs', 'md'));
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  // const colDefs = [
-  //   { field: 'name' },
-  //   { field: 'date' },
-  //   { field: 'category' },
-  //   { field: 'amount' },
-  // ];
-
-  // const colDefs = [
-  //   { headerName: 'Name', field: 'name', sortable: true, filter: true },
-  //   { headerName: 'Date', field: 'date', sortable: true, filter: true },
-  //   { headerName: 'Category', field: 'category', sortable: true, filter: true },
-  //   { headerName: 'Amount', field: 'amount', sortable: true, filter: true },
-  // ];
 
   const transactionData = data.transactions;
 
@@ -117,13 +143,15 @@ export const Transactions = () => {
       <Typography variant="h1">Transactions</Typography>
       <Grid2
         container
+        component={Paper}
         gap="24px"
-        flexDirection="column"
+        flexDirection="row"
         height={'100%'}
         width={'100%'}
+        padding={'32px'}
       >
-        <Paper sx={{ width: '100%', mb: 2 }}>
-          <EnhancedTableHead />
+        <EnhancedTableHead />
+        <Paper sx={{ width: '100%', mb: 2, boxShadow: 'none' }}>
           <TableContainer>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -135,10 +163,12 @@ export const Transactions = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {transactionData.map((row) => (
+                {transactionData.map((row, index) => (
                   <TableRow
-                    key={row.name}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    key={`${row.name}-${index}`}
+                    sx={{
+                      '&:last-child td, &:last-child th': { border: 0 },
+                    }}
                   >
                     <TableCell component="th" scope="name">
                       {row.name}
@@ -153,20 +183,6 @@ export const Transactions = () => {
           </TableContainer>
         </Paper>
       </Grid2>
-      {/* <Grid2
-        container
-        flexDirection="column"
-        display="flex"
-        gap="24px"
-        maxWidth="1060px"
-        height={{
-          md: '761px',
-          lg: '761px',
-          xl: '761px',
-        }}
-      >
-     
-      </Grid2> */}
     </Box>
   );
 };
