@@ -105,7 +105,7 @@ export const Sidebar = () => {
             to={`${menu.url}`}
             style={{ textDecoration: 'none' }}
           >
-            {<NavItem menu={menu} expand={expand} />}
+            <NavItem menu={menu} expand={expand} />
           </Link>
         ))}
       </MenuList>
