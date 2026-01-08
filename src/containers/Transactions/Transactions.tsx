@@ -1,6 +1,5 @@
 import {
   Button,
-  Menu,
   MenuItem,
   Select,
   styled,
@@ -29,6 +28,8 @@ import {
   useReactTable,
   getSortedRowModel,
   SortingState,
+  ColumnFiltersState,
+  getFilteredRowModel,
 } from '@tanstack/react-table';
 import { LeftArrowIcon } from 'icons/LeftArrowIcon';
 import { RightArrowIcon } from 'icons/RightArrowIcon';
@@ -64,27 +65,67 @@ const sortByList = [
   { id: 'amount', value: 'lowest', name: 'Lowest', desc: false },
 ];
 
+const categoryList = [
+  {
+    id: 'category',
+    value: 'All Transactions',
+    displayName: 'All Transactions',
+  },
+  {
+    id: 'category',
+    value: 'Entertainment',
+    displayName: 'Entertainment',
+  },
+  {
+    id: 'category',
+    value: 'Bills',
+    displayName: 'Bills',
+  },
+  {
+    id: 'category',
+    value: 'Groceries',
+    displayName: 'Groceries',
+  },
+  {
+    id: 'category',
+    value: 'Dining Out',
+    displayName: 'Dining Out',
+  },
+  {
+    id: 'category',
+    value: 'Transportation',
+    displayName: 'Transportation',
+  },
+  {
+    id: 'category',
+    value: 'Personal Care',
+    displayName: 'Personal Care',
+  },
+];
+
 const EnhancedTableHead = ({
   sorting,
   setSorting,
+  columnFilters,
+  setColumnFilters,
 }: {
   sorting: SortingState;
   setSorting: (value: SortingState) => void;
+  columnFilters: ColumnFiltersState;
+  setColumnFilters: (value: ColumnFiltersState) => void;
 }) => {
-  const theme = useTheme();
-  const [category, setCategory] = useState('allTransactions');
-
   const sortBy = sortByList.find((sort) =>
     sorting.some((s) => s.id === sort.id && s.desc === sort.desc)
   )?.value;
 
-  console.log({ sortBy }, { sorting });
+  const category =
+    categoryList.find((category) =>
+      columnFilters.some((column) => column.value === category.value)
+    )?.value ?? 'All Transactions';
 
-  const handleSortByCriteria = (criteria) => {
-    console.log({ criteria });
-
+  const handleSortByCriteria = (value: string) => {
     const selectedSortOption = sortByList.find(
-      (option) => option.value === criteria
+      (option) => option.value === value
     );
 
     if (!selectedSortOption) return;
@@ -93,20 +134,36 @@ const EnhancedTableHead = ({
       (sort) => !sortByList.some((s) => s.id === sort.id)
     );
 
-    console.log({ filteredList });
-
     filteredList.push({
       id: selectedSortOption?.id,
       desc: selectedSortOption?.desc,
     });
 
-    // 'criteria' would be an array of ColumnSort objects, e.g.,
-    // [{ id: 'firstName', desc: false }, { id: 'age', desc: true }]
     setSorting(filteredList);
   };
 
+  const handleCategoryChange = (categoryValue: string) => {
+    const filteredList = columnFilters.filter(
+      (cat) => !categoryList.some((c) => c.id === cat.id)
+    );
+
+    console.log({ categoryValue });
+
+    filteredList.push({
+      id: 'category',
+      value: categoryValue === 'All Transactions' ? '' : categoryValue,
+    });
+
+    setColumnFilters(filteredList);
+  };
+
   return (
-    <Grid2 width={'100%'} display="flex" justifyContent="space-between">
+    <Grid2
+      width={'100%'}
+      maxHeight="45px"
+      display="flex"
+      justifyContent="space-between"
+    >
       <TextField
         placeholder="Search transaction"
         slotProps={{
@@ -154,20 +211,14 @@ const EnhancedTableHead = ({
             size="small"
             sx={{ height: '45px', minWidth: '132px' }}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setCategory(e.target.value)
+              handleCategoryChange(e.target.value)
             }
           >
-            <StyledMenuItem value="allTransactions">
-              All Transactions
-            </StyledMenuItem>
-            <StyledMenuItem value="entertainment">Entertainment</StyledMenuItem>
-            <StyledMenuItem value="bills">Bills</StyledMenuItem>
-            <StyledMenuItem value="groceries">Groceries</StyledMenuItem>
-            <StyledMenuItem value="diningOut">Dining Out</StyledMenuItem>
-            <StyledMenuItem value="transportation">
-              Transportation
-            </StyledMenuItem>
-            <StyledMenuItem value="personalCare">Personal Care</StyledMenuItem>
+            {categoryList.map((cat) => (
+              <StyledMenuItem key={cat.value} value={cat.value}>
+                {cat.displayName}
+              </StyledMenuItem>
+            ))}
           </StyledSelect>
         </Box>
       </Grid2>
@@ -210,6 +261,7 @@ const columnsDef: ColumnDef<
     header: 'Category',
     accessorKey: 'category',
     cell: (info) => {
+      console.log(info.getValue());
       return <Typography variant="body2">{info.getValue()}</Typography>;
     },
   },
@@ -246,6 +298,9 @@ export const Transactions = () => {
   const [sorting, setSorting] = useState<SortingState>([
     { id: 'date', desc: true },
   ]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([
+    { id: 'category', value: '' },
+  ]);
   const isTablet = useMediaQuery(theme.breakpoints.between('xs', 'md'));
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -270,11 +325,14 @@ export const Transactions = () => {
     columns: columnsDef,
     state: {
       sorting,
+      columnFilters,
     },
+    onColumnFiltersChange: setColumnFilters,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     rowCount: 5,
   });
 
@@ -306,7 +364,12 @@ export const Transactions = () => {
         width={'100%'}
         padding={'32px'}
       >
-        <EnhancedTableHead sorting={sorting} setSorting={setSorting} />
+        <EnhancedTableHead
+          sorting={sorting}
+          setSorting={setSorting}
+          columnFilters={columnFilters}
+          setColumnFilters={setColumnFilters}
+        />
         <Paper sx={{ width: '100%', boxShadow: 'none' }}>
           <TableContainer>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -337,7 +400,6 @@ export const Transactions = () => {
                       }}
                     >
                       {row.getVisibleCells().map((cell) => {
-                        console.log({ cell });
                         const cellContent = cell.column.columnDef.cell;
                         return (
                           <TableCell key={cell.id}>
