@@ -115,23 +115,23 @@ const EnhancedTableHead = ({
   setColumnFilters: (value: ColumnFiltersState) => void;
 }) => {
   const sortBy = sortByList.find((sort) =>
-    sorting.some((s) => s.id === sort.id && s.desc === sort.desc)
+    sorting.some((s) => s.id === sort.id && s.desc === sort.desc),
   )?.value;
 
   const category =
     categoryList.find((category) =>
-      columnFilters.some((column) => column.value === category.value)
+      columnFilters.some((column) => column.value === category.value),
     )?.value ?? 'All Transactions';
 
   const handleSortByCriteria = (value: string) => {
     const selectedSortOption = sortByList.find(
-      (option) => option.value === value
+      (option) => option.value === value,
     );
 
     if (!selectedSortOption) return;
 
     const filteredList = sorting.filter(
-      (sort) => !sortByList.some((s) => s.id === sort.id)
+      (sort) => !sortByList.some((s) => s.id === sort.id),
     );
 
     filteredList.push({
@@ -144,10 +144,8 @@ const EnhancedTableHead = ({
 
   const handleCategoryChange = (categoryValue: string) => {
     const filteredList = columnFilters.filter(
-      (cat) => !categoryList.some((c) => c.id === cat.id)
+      (cat) => !categoryList.some((c) => c.id === cat.id),
     );
-
-    console.log({ categoryValue });
 
     filteredList.push({
       id: 'category',
@@ -315,10 +313,8 @@ export const Transactions = () => {
         category: transaction.category,
         amount: transaction.amount,
       })),
-    [data.transactions]
+    [data.transactions],
   );
-
-  // console.log({ transactionData });
 
   const table = useReactTable({
     data: transactionData,
@@ -333,14 +329,9 @@ export const Transactions = () => {
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    rowCount: 5,
   });
 
-  // console.log({ table });
-
   const flatHeaders = table.getFlatHeaders();
-
-  // console.log({ flatHeaders });
 
   return (
     <Box
